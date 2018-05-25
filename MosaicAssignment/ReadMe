@@ -1,0 +1,16 @@
+The solution contains automation of following functionalities
+ 1. Login
+ 2. Logout
+ 3. Currency table fetching results from api 
+ 
+Automation of the demo application is done based on PageObject Framework where the all the web elements 
+of each webpage are located in each of the java class grouped under "pages" package. Tests are then written on each of the test 
+classes grouped under "tests" package. WebDriverFactory class is written to open the browser for each test within "utilities"
+package.
+
+The following libraries were added and used to the project
+   1. org.json.simple - to use JSONObject
+   2. gson - to convert JSONObject to Map
+   3. TestNG - To have assertions in the tests and produce the tests in report format
+   
+The solution currently contains 10 tests, where 3 of them are failing currently.
