@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="MosaicSuite" parallel="false">
+  <test name="MosaicTestApp">
+    <classes>
+      <class name="tests.LoginTest"/>
+      <class name="tests.DashboardTest"/>
+      <class name="tests.APIResponseTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

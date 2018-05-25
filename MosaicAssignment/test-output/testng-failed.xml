@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [MosaicSuite]">
+  <test thread-count="5" name="MosaicTestApp(failed)">
+    <classes>
+      <class name="tests.LoginTest">
+        <methods>
+          <include name="loginWithNoCredentials"/>
+          <include name="logoutTest"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- tests.LoginTest -->
+      <class name="tests.DashboardTest">
+        <methods>
+          <include name="tearDown"/>
+          <include name="assertRowCountWithAPIDataSize"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- tests.DashboardTest -->
+    </classes>
+  </test> <!-- MosaicTestApp(failed) -->
+</suite> <!-- Failed suite [MosaicSuite] -->
