@@ -2,7 +2,9 @@ package tests;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertSame;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -104,6 +106,63 @@ public class DashboardTest {
             			Assert.assertEquals(entry.getValue().toString(), apientry.getValue().toString(), errorMessage);
             		}
             }
+		}
+	}
+	
+	/* Test to check that all the key - value (currency -rates)
+	 * pairs in apiMap are in tableMap
+	 */
+	@Test
+	public void checkAllAPICrncyInTable() throws ParseException
+	{
+		// Table Data
+		Map<String, Object> tableMap = dashboardPage.addRowDataToMap();
+		// API Data
+		responsePage = new APIResponsePageObject(driver);
+		Map<String, Object> apiMap = responsePage.getRateDataFromAPI();
+		
+		// Map that has key - values missing in tableMap that are in apiMap
+		Map missingCurrenciesInTableMap = new HashMap<>(apiMap);
+		missingCurrenciesInTableMap.keySet().removeAll(tableMap.keySet());
+		missingCurrenciesInTableMap.values().removeAll(tableMap.values());
+		
+		if(missingCurrenciesInTableMap.size() > 1)
+		{
+			errorMessage = "Html table is missing " + missingCurrenciesInTableMap.toString() + " from API";
+			Assert.fail(errorMessage);
+		}
+		else
+		{
+			assertSame(tableMap, apiMap);
+		}
+	}
+	
+	/* Test to check that all the key - value (currency -rates)
+	 * pairs in tableMap are from apiMap and there are no additional 
+	 * outside key - value pair
+	 */
+	@Test
+	public void checkNoElementInTableOutsideAPI() throws ParseException
+	{
+		// Table Data
+		Map<String, Object> tableMap = dashboardPage.addRowDataToMap();
+		// API Data
+		responsePage = new APIResponsePageObject(driver);
+		Map<String, Object> apiMap = responsePage.getRateDataFromAPI();
+		
+		// Map that has key - values missing in tableMap that are in apiMap
+		Map notInAPIMap = new HashMap<>(tableMap);
+		notInAPIMap.keySet().removeAll(apiMap.keySet());
+		notInAPIMap.values().removeAll(apiMap.values());
+		
+		if(notInAPIMap.size() > 1)
+		{
+			errorMessage = "Html table is having " + notInAPIMap.toString() + " that are not from API";
+			Assert.fail(errorMessage);
+		}
+		else
+		{
+			Assert.assertTrue(notInAPIMap.size() == 0);
 		}
 	}
 	
